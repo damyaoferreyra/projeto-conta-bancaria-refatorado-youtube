@@ -20,7 +20,7 @@ class CaixaEletronicoViewController {
         dadosConta.innerText = ` |  Conta ${contaLogada.numeroConta}`;
 
         const saldoArea = headerArea.querySelector("#saldo_conta");
-        saldoArea.innerText = contaLogada.saldo;
+        saldoArea.innerText = Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(contaLogada.saldo);
     }
 
     carregarEventos = (iniciarOperacao, onSubmit) => {
