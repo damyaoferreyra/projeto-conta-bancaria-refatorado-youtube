@@ -23,9 +23,20 @@ class CaixaEletronicoViewController {
         saldoArea.innerText = Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(contaLogada.saldo);
     }
 
+    limparSelecao = () => {
+        document.querySelectorAll("#operacao_action li[data-template]").forEach(li => {
+            li.style = 'opacity: 1'
+        })
+    }
+
     carregarEventos = (iniciarOperacao, onSubmit) => {
+
+
         document.querySelectorAll("#operacao_action li[data-template]").forEach(li => {
             li.addEventListener("click", (e) => {
+                this.limparSelecao()
+                e.target.style = 'opacity: 0.5'
+
                 const templateId = e.target.getAttribute('data-template');
                 const template = document.getElementById(templateId);
 
