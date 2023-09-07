@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa eletrônico - Banco virtual</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <header class="section_header">
+                <div class="section_header_title">Caixa Eletrônico</div>
+                <div>
+                    <p>Olá,<span id="pessoa_nome"></span><span id="conta_logada"></span></p>
+                    <p>Saldo:<span id="saldo_conta"></span></p>
+                </div>
+            </header>
+            <section>
+                <div class="operacao_content">
+                    <ul id="operacao_action">
+                        <li data-template="template_form_depositar">
+                            <image src="img/icon_money_recive.svg" class="operacao_icon" /> Depositar
+                        </li>
+                        <li data-template="template_form_sacar">
+                            <image src="img/icon_money_withdraw.svg" class="operacao_icon" /> Sacar
+                        </li>
+                        <li data-template="template_form_transferir">
+                            <image src="img/icon_money_send.svg" class="operacao_icon" /> Transferir
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section id="operacao_form_content">
+
+            </section>
+            <template id="template_form_transferir">
+                <h4>Transferência</h4>
+                <form>
+                    <input type="hidden" name="operacao" id="operacao" value="transferir" />
+                    <input type="number" placeholder="Valor da transferência" name="valor" required />
+                    <select name="conta" id="conta_select">
+                    </select>
+                    <button type="submit">Transferir</button>
+                </form>
+            </template>
+            <template id="template_form_depositar">
+                <h4>Deposito</h4>
+                <form>
+                    <input type="hidden" name="operacao" id="operacao" value="depositar" />
+                    <input type="number" placeholder="Valor do deposito" name="valor" required />
+                    <button type="submit">Depositar</button>
+                </form>
+            </template>
+            <template id="template_form_sacar">
+                <h4>Saque</h4>
+                <form>
+                    <input type="hidden" name="operacao" id="operacao" value="sacar" />
+                    <input type="number" placeholder="Valor do saque" name="valor" required />
+                    <button type="submit">Sacar</button>
+                </form>
+            </template>
+
+            <footer>
+
+                <span>
+                    @youtube.com
+                </span>
+                <span>
+                    @instagram.com
+                </span>
+                <span>
+                    @linkdl.com
+                </span>
+            </footer>
+        </div>
+    </main>
+</body>
+
+<script src="/js/models/Pessoa.js"></script>
+<script src="/js/models/Conta.js"></script>
+
+<script src="/js/services/ContasBancarias.js"></script>
+<script src="/js/services/OperacaoBancaria.js"></script>
+
+<script src="/js/controllers/views/CaixaEletronicoViewController.js"></script>
+<script src="/js/controllers/views/templates/TemplateTransferirViewController.js"></script>
+<script src="/js/controllers/CaixaEletronico.js"></script>
+
+</html>

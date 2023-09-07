@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+input,
+select,
+button {
+    padding: 10px;
+    margin: 2px;
+    border: 0;
+    background: white;
+    width: 100%;
+}
+
+input:focus,
+select:focus,
+button:focus {
+    outline: 1px solid gray;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 10vh;
+}
+
+.section_header_title {
+    font-weight: 900;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    gap: 20px;
+    padding: 30px;
+    box-shadow: 5px 5px 14px 5px lightsteelblue;
+}
+
+.operacao_content {
+    display: flex;
+    justify-content: center;
+}
+
+#operacao_action li {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    list-style-type: none;
+    float: left;
+    margin: 5px;
+    padding: 20px 30px;
+    border-radius: 30px;
+    border: 1px solid gray;
+}
+
+#operacao_action li:hover {
+    opacity: 0.6;
+}
+
+.operacao_icon {
+    width: 20px;
+}
+
+#pessoa_nome {
+    font-weight: 900;
+}
+
+#saldo_conta {
+    font-weight: 900;
+}
+
+#operacao_form_content {
+    min-height: 200px;
+    position: relative;
+}
+
+#operacao_form_content form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#operacao_form_content button {
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#operacao_form_content button:hover {
+    opacity: 0.6;
+}
+
+#operacao_form_content input {
+    border-bottom: 1px solid gray;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (max-width: 600px) {
+    main {
+        margin-top: 5vh;
+    }
+    .container {
+        min-width: 90%;
+    }
+    #section_header {
+        display: initial;
+    }
+    #operacao_action li {
+        padding: 3px;
+        margin: 1px;
+        justify-content: left;
+        width: auto;
+    }
+    #operacao_form_content form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    footer {
+        flex-direction: column;
+    }
+}
