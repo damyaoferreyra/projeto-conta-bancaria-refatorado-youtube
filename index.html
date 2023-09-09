@@ -16,9 +16,9 @@
         <div class="container">
             <header class="section_header">
                 <div class="section_header_title">Caixa Eletrônico</div>
-                <div>
-                    <p>Olá,<span id="pessoa_nome"></span><span id="conta_logada"></span></p>
-                    <p>Saldo:<span id="saldo_conta"></span></p>
+                <div class="section_header_info">
+                    <p>Olá, <span id="pessoa_nome"></span><span id="conta_logada"></span></p>
+                    <p>Saldo: <span id="saldo_conta"></span></p>
                 </div>
             </header>
             <section>
@@ -37,34 +37,33 @@
                 </div>
             </section>
             <section id="main_template_area">
-
+                <div class="content_feedback animation-write">
+                    Selecione uma operação
+                </div>
             </section>
             <template id="template_form_transferir">
-                <h4>Transferência</h4>
                 <form>
-                    <input type="number" placeholder="Valor da transferência" name="valor" required />
+                    <input type="number" placeholder="Valor da transferência" name="valor" required min="1"/>
                     <select name="conta" id="conta_select">
                     </select>
                     <button type="submit">Transferir</button>
                 </form>
             </template>
             <template id="template_form_depositar">
-                <h4>Deposito</h4>
                 <form>
-                    <input type="number" placeholder="Valor do deposito" name="valor" required />
+                    <input type="number" placeholder="Valor do deposito" name="valor" required  min="1"/>
                     <button type="submit">Depositar</button>
                 </form>
             </template>
             <template id="template_form_sacar">
-                <h4>Saque</h4>
                 <form>
-                    <input type="number" placeholder="Valor do saque" name="valor" required />
+                    <input type="number" placeholder="Valor do saque" name="valor" required  min="1"/>
                     <button type="submit">Sacar</button>
                 </form>
             </template>
 
             <template id="template_sucesso">
-                <div class="content_feedback_success animation-write">
+                <div class="content_feedback animation-write">
                     Operação finalizada com sucesso
                 </div>
             </template>
