@@ -75,6 +75,6 @@ class CaixaEletronicoViewController {
 
         setTimeout(() => {
             if (operacaoFinalizada === this.operacaoAtual) this.limparOperacao()
-        }, 2000)
+        }, 5000)
     }
 }

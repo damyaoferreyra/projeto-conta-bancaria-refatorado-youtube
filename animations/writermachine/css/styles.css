@@ -1,0 +1,30 @@
+.animation-write::after {
+    content: '_';
+    opacity: 1;
+    margin-left: -1rem;
+    animation: piscar .7s infinite;
+}
+
+@keyframes piscar {
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes down {
+    0% {
+        top: -2rem
+    }
+    100% {
+        top: 0
+    }
+}
+
+.animation-dow {
+    animation: down .7s both;
+    position: relative;
+}
