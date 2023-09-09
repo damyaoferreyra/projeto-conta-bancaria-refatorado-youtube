@@ -17,6 +17,7 @@ class CaixaEletronicoViewController {
 
         this.carregarEventosOperacoes(iniciarOperacao);
         this.carregarDadosHeader(this.contaLogada);
+        this.iniciarRelogio()
     }
 
     carregarDadosHeader = (contaLogada) => {
@@ -76,5 +77,22 @@ class CaixaEletronicoViewController {
         setTimeout(() => {
             if (operacaoFinalizada === this.operacaoAtual) this.limparOperacao()
         }, 5000)
+    }
+
+    iniciarRelogio = () => {
+        const relogioContent = document.getElementById('time-now')
+
+        setInterval(() => {
+            relogioContent.innerText = Intl.DateTimeFormat("pt-br", {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+                hour12: false,
+                timeZone: "America/Sao_paulo",
+            }).format(new Date())
+        }, 1000)
     }
 }
