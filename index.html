@@ -23,25 +23,24 @@
             <section>
                 <div class="operacao_content">
                     <ul id="operacao_action">
-                        <li data-template="template_form_depositar">
+                        <li data-template="template_form_depositar" data-operacao="depositar">
                             <image src="img/icon_money_recive.svg" class="operacao_icon" /> Depositar
                         </li>
-                        <li data-template="template_form_sacar">
+                        <li data-template="template_form_sacar" data-operacao="sacar">
                             <image src="img/icon_money_withdraw.svg" class="operacao_icon" /> Sacar
                         </li>
-                        <li data-template="template_form_transferir">
+                        <li data-template="template_form_transferir" data-operacao="transferir">
                             <image src="img/icon_money_send.svg" class="operacao_icon" /> Transferir
                         </li>
                     </ul>
                 </div>
             </section>
-            <section id="operacao_form_content">
+            <section id="main_template_area">
 
             </section>
             <template id="template_form_transferir">
                 <h4>Transferência</h4>
                 <form>
-                    <input type="hidden" name="operacao" id="operacao" value="transferir" />
                     <input type="number" placeholder="Valor da transferência" name="valor" required />
                     <select name="conta" id="conta_select">
                     </select>
@@ -51,7 +50,6 @@
             <template id="template_form_depositar">
                 <h4>Deposito</h4>
                 <form>
-                    <input type="hidden" name="operacao" id="operacao" value="depositar" />
                     <input type="number" placeholder="Valor do deposito" name="valor" required />
                     <button type="submit">Depositar</button>
                 </form>
@@ -59,10 +57,15 @@
             <template id="template_form_sacar">
                 <h4>Saque</h4>
                 <form>
-                    <input type="hidden" name="operacao" id="operacao" value="sacar" />
                     <input type="number" placeholder="Valor do saque" name="valor" required />
                     <button type="submit">Sacar</button>
                 </form>
+            </template>
+
+            <template id="template_sucesso">
+                <div class="content_feedback_success">
+                    Operação finalizada com template sucesso
+                </div>
             </template>
 
             <footer>
@@ -88,7 +91,9 @@
 <script src="/js/services/OperacaoBancaria.js"></script>
 
 <script src="/js/controllers/views/CaixaEletronicoViewController.js"></script>
+<script src="/js/controllers/views/templates/TemplateSacarViewController.js"></script>
+<script src="/js/controllers/views/templates/TemplateDepositarViewController.js"></script>
 <script src="/js/controllers/views/templates/TemplateTransferirViewController.js"></script>
-<script src="/js/controllers/CaixaEletronico.js"></script>
+<script src="/js/controllers/CaixaEletronicoController.js"></script>
 
 </html>

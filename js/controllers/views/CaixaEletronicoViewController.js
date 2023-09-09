@@ -1,70 +1,80 @@
 class CaixaEletronicoViewController {
-    constructor({ iniciarOperacao, contaLogada, onSubmit }) {
+    constructor({ iniciarOperacao, contaLogada }) {
+        this.headerTags = {
+            nomePessoa: document.querySelector(".section_header #pessoa_nome"),
+            conta: document.querySelector(".section_header #conta_logada"),
+            saldo: document.querySelector(".section_header #saldo_conta"),
+        }
+        this.operacaoActionTags = document.querySelectorAll("#operacao_action li[data-template]");
+        this.mainTemplateArea = document.getElementById("main_template_area");
+
         this.contaLogada = contaLogada;
-        this.init(iniciarOperacao ? iniciarOperacao : console.log, onSubmit);
+        this.init(iniciarOperacao ? iniciarOperacao : console.log);
+        this.operacaoAtual = null
     }
 
-    init = function(iniciarOperacao, onSubmit) {
+    init = function(iniciarOperacao) {
 
-        this.carregarEventos(iniciarOperacao, onSubmit);
+        this.carregarEventosOperacoes(iniciarOperacao);
         this.carregarDadosHeader(this.contaLogada);
     }
 
     carregarDadosHeader = (contaLogada) => {
-        const headerArea = document.querySelector(".section_header ");
 
-        const nomePessoaArea = headerArea.querySelector("#pessoa_nome");
-        nomePessoaArea.innerText = contaLogada.pessoa.nome;
-
-        const dadosConta = headerArea.querySelector("#conta_logada");
-        dadosConta.innerText = ` |  Conta ${contaLogada.numeroConta}`;
-
-        const saldoArea = headerArea.querySelector("#saldo_conta");
-        saldoArea.innerText = Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(contaLogada.saldo);
+        this.headerTags.nomePessoa.innerText = contaLogada.pessoa.nome;
+        this.headerTags.conta.innerText = ` |  Conta ${contaLogada.numeroConta}`;
+        this.headerTags.saldo.innerText = Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(contaLogada.saldo);
     }
 
-    limparSelecao = () => {
-        document.querySelectorAll("#operacao_action li[data-template]").forEach(li => {
+    limparOperacao = () => {
+        this.operacaoActionTags.forEach(li => {
             li.style = 'opacity: 1'
-        })
+        });
+        this.mainTemplateArea.innerHTML = '';
+
     }
 
-    carregarEventos = (iniciarOperacao, onSubmit) => {
+    carregarEventosOperacoes = (iniciarOperacao) => {
 
 
-        document.querySelectorAll("#operacao_action li[data-template]").forEach(li => {
+        this.operacaoActionTags.forEach(li => {
             li.addEventListener("click", (e) => {
-                this.limparSelecao()
-                e.target.style = 'opacity: 0.5'
 
-                const templateId = e.target.getAttribute('data-template');
-                const template = document.getElementById(templateId);
+                this.limparOperacao()
 
-                // Cria uma cópia do conteúdo do template
-                const clone = document.importNode(template.content, true);
+                const currentTarget = e.currentTarget
+                currentTarget.style = 'opacity: 0.5'
 
+                const templateId = currentTarget.getAttribute('data-template');
+                const template = this.carregarTemplate(templateId);
                 // Anexa o conteúdo clonado ao body, ou a qualquer outro elemento desejado
-                const operacaoContentForm = document.getElementById("operacao_form_content");
-                operacaoContentForm.innerHTML = ''
-                operacaoContentForm.appendChild(clone);
+                this.mainTemplateArea.appendChild(template);
 
-                const operacao = operacaoContentForm.querySelector("form #operacao").value;
-                iniciarOperacao({ operacao, template: operacaoContentForm });
-
-                operacaoContentForm.querySelector("form").addEventListener("submit", (e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.target);
-                    const data = Object.fromEntries(formData);
-                    onSubmit(data)
-
-                    // limpar formulário
-                    e.target.reset();
-                })
+                this.operacaoAtual = currentTarget.attributes['data-operacao'].value;
+                iniciarOperacao({ operacao: this.operacaoAtual, view: this.mainTemplateArea });
             })
         })
     }
 
+    carregarTemplate = (elementId) => {
+        const template = document.getElementById(elementId);
+        // Cria uma cópia do conteúdo do template
+        return document.importNode(template.content, true);
+    }
+
     atualizar = () => {
-        this.carregarDadosHeader(this.contaLogada)
+        this.carregarDadosHeader(this.contaLogada);
+    }
+
+    finalizar = () => {
+        const operacaoFinalizada = this.operacaoAtual
+
+        this.atualizar();
+        this.limparOperacao();
+        this.mainTemplateArea.appendChild(this.carregarTemplate('template_sucesso'));
+
+        setTimeout(() => {
+            if (operacaoFinalizada === this.operacaoAtual) this.limparOperacao()
+        }, 2000)
     }
 }

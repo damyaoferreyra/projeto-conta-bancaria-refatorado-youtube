@@ -78,36 +78,43 @@ main {
     font-weight: 900;
 }
 
-#operacao_form_content {
+#main_template_area {
     min-height: 200px;
     position: relative;
 }
 
-#operacao_form_content form {
+#main_template_area form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#operacao_form_content button {
+#main_template_area button {
     background-color: white;
     border: 1px solid gray;
     border-radius: 10px;
     padding: 5px;
 }
 
-#operacao_form_content button:hover {
+#main_template_area button:hover {
     opacity: 0.6;
 }
 
-#operacao_form_content input {
+#main_template_area input {
     border-bottom: 1px solid gray;
 }
 
 footer {
     display: flex;
     justify-content: space-around;
+}
+
+.content_feedback_success {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 600px) {
@@ -126,7 +133,10 @@ footer {
         justify-content: left;
         width: auto;
     }
-    #operacao_form_content form {
+    #operacao_action li image {
+        z-index: inherit;
+    }
+    #main_template_area form {
         width: 100%;
     }
 }

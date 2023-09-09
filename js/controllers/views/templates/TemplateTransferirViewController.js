@@ -1,17 +1,14 @@
 class TemplateTransferirViewController {
 
-    carregarDadosIniciasTemplate = (dados) => {
+    init = (dados) => {
 
-        switch (dados.operacao) {
-            case "transferir":
-                this.carregarContasTransferencia(dados)
-                break;
-        }
+        this.carregarContasTransferencia(dados)
+        this.carregarEventosForm(dados);
     }
 
     carregarContasTransferencia = (dados) => {
         dados.contas.forEach(conta => {
-            const selectContaInput = dados.template.querySelector("#conta_select");
+            const selectContaInput = dados.view.querySelector("#conta_select");
 
             const option = document.createElement("option");
             option.value = conta.numeroConta;
@@ -20,7 +17,17 @@ class TemplateTransferirViewController {
         })
     }
 
-    atualizar = () => {
-        this.carregarDadosHeader(this.contaLogada)
+    carregarEventosForm = (dados) => {
+        dados.view.querySelector("form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+
+            dados.onSubmit(data)
+
+            // limpar formulário
+            e.target.reset();
+        })
+        dados.view.querySelector("form > input").focus()
     }
 }
